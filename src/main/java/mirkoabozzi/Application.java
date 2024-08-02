@@ -1,5 +1,6 @@
 package mirkoabozzi;
 
+import mirkoabozzi.entities.Catalogo;
 import mirkoabozzi.entities.Libro;
 import mirkoabozzi.entities.Rivista;
 import mirkoabozzi.enums.Periodicita;
@@ -19,8 +20,7 @@ public class Application {
     public static void main(String[] args) {
 
 
-        List<Libro> listaLibri = new ArrayList<>();
-        List<Rivista> listaRiviste = new ArrayList<>();
+        List<Catalogo> listaCatalogo = new ArrayList<>();
 
         Libro libro1 = new Libro(1234, "Il Signore Degli Anelli", 1978, 530, "Tolkien", "romanzo");
         Libro libro2 = new Libro(5678, "Harry Potter e la pietra filosofale", 1997, 344, "Rowling", "Romanzo");
@@ -30,15 +30,15 @@ public class Application {
         Rivista rivista2 = new Rivista(1415, "Unione Sarda", 1889, 10, Periodicita.SETTIMANALE);
         Rivista rivista3 = new Rivista(1617, "La Gazzetta Dello Sport", 1896, 10, Periodicita.SETTIMANALE);
         Rivista rivista4 = new Rivista(1819, "Tutto Sport", 1946, 10, Periodicita.MENSILE);
-        listaLibri.add(libro1);
-        listaLibri.add(libro2);
-        listaLibri.add(libro3);
-        listaLibri.add(libro4);
+        listaCatalogo.add(libro1);
+        listaCatalogo.add(libro2);
+        listaCatalogo.add(libro3);
+        listaCatalogo.add(libro4);
 
-        listaRiviste.add(rivista1);
-        listaRiviste.add(rivista2);
-        listaRiviste.add(rivista3);
-        listaRiviste.add(rivista4);
+        listaCatalogo.add(rivista1);
+        listaCatalogo.add(rivista2);
+        listaCatalogo.add(rivista3);
+        listaCatalogo.add(rivista4);
         stop:
         while (true) {
 
@@ -60,22 +60,22 @@ public class Application {
             }
             switch (scelta) {
                 case "1":
-                    aggiungiLibro(listaLibri);
+                    aggiungiLibro(listaCatalogo);
                     break;
                 case "2":
-                    rimuoviLibro(listaLibri);
+                    rimuoviLibro(listaCatalogo);
                     break;
                 case "3":
-                    cercaISBN(listaLibri);
+                    cercaISBN(listaCatalogo);
                     break;
                 case "4":
-                    cercaAnno(listaLibri);
+                    cercaAnno(listaCatalogo);
                     break;
                 case "5":
-                    cercaAutore(listaLibri);
+                    cercaAutore(listaCatalogo);
                     break;
                 case "6":
-                    salvaArchivio(listaLibri);
+                    salvaArchivio(listaCatalogo);
                     break;
                 case "7":
                     leggiArchivio();
@@ -90,7 +90,7 @@ public class Application {
         }
     }
 
-    public static void aggiungiLibro(List<Libro> listaLibri) {
+    public static void aggiungiLibro(List<Catalogo> listaCatalogo) {
         try {
             System.out.println("Aggiungi un libro");
             System.out.println("Inserisci ISBN");
@@ -109,9 +109,9 @@ public class Application {
             System.out.println("Inserisci Genere");
             String genere = scanner.nextLine();
             Libro libro = new Libro(isbn, titolo, annoPubblicazione, numeroPagine, autore, genere);
-            listaLibri.add(libro);
+            listaCatalogo.add(libro);
             System.out.println("Libro aggiunto: " + libro);
-            listaLibri.forEach(System.out::println);
+            listaCatalogo.forEach(System.out::println);
         } catch (InputMismatchException e) {
             System.out.println("Input non valido inserisci i dati corretti");
             scanner.nextLine();
@@ -119,22 +119,22 @@ public class Application {
 
     }
 
-    public static void rimuoviLibro(List<Libro> listaLibri) {
-        if (listaLibri.isEmpty()) System.out.println("La lista di libri è vuota!");
+    public static void rimuoviLibro(List<Catalogo> listaCatalogo) {
+        if (listaCatalogo.isEmpty()) System.out.println("La lista di libri è vuota!");
         else {
             try {
-                listaLibri.forEach(System.out::println);
+                listaCatalogo.forEach(System.out::println);
                 System.out.println("Che libro vuoi rimuovere? scegli un ISBN valido tra i libri sopra riportati");
                 int isbn = scanner.nextInt();
                 scanner.nextLine();
-                boolean libroEsiste = listaLibri.stream().anyMatch(book -> book.getIsbn() == isbn);
+                boolean libroEsiste = listaCatalogo.stream().anyMatch(book -> book.getIsbn() == isbn);
                 if (libroEsiste) {
-                    listaLibri.removeIf(book -> book.getIsbn() == isbn);
+                    listaCatalogo.removeIf(book -> book.getIsbn() == isbn);
                     System.out.println("libro rimosso");
                 } else {
                     System.out.println("Il libro non esiste");
                 }
-                listaLibri.forEach(System.out::println);
+                listaCatalogo.forEach(System.out::println);
             } catch (InputMismatchException e) {
                 System.out.println("Inserisci un ISBN valido");
                 scanner.nextLine();
@@ -143,18 +143,18 @@ public class Application {
         }
     }
 
-    public static void cercaISBN(List<Libro> listaLibri) {
-        if (listaLibri.isEmpty()) System.out.println("La lista di libri è vuota!");
+    public static void cercaISBN(List<Catalogo> listaCatalogo) {
+        if (listaCatalogo.isEmpty()) System.out.println("La lista di libri è vuota!");
         else {
 
             try {
-                listaLibri.forEach(System.out::println);
+                listaCatalogo.forEach(System.out::println);
                 System.out.println("Inserisci un ISBN valido tra i libri sopra riportati");
                 int isbn = scanner.nextInt();
                 scanner.nextLine();
-                boolean libroEsiste = listaLibri.stream().anyMatch(book -> book.getIsbn() == isbn);
+                boolean libroEsiste = listaCatalogo.stream().anyMatch(book -> book.getIsbn() == isbn);
                 if (libroEsiste) {
-                    listaLibri.stream().filter(book -> book.getIsbn() == isbn).forEach(System.out::println);
+                    listaCatalogo.stream().filter(book -> book.getIsbn() == isbn).forEach(System.out::println);
                 } else {
                     System.out.println("Il libro non esiste");
                 }
@@ -165,15 +165,15 @@ public class Application {
         }
     }
 
-    public static void cercaAnno(List<Libro> listaLibri) {
-        if (listaLibri.isEmpty()) System.out.println("La lista di libri è vuota!");
+    public static void cercaAnno(List<Catalogo> listaCatalogo) {
+        if (listaCatalogo.isEmpty()) System.out.println("La lista di libri è vuota!");
         else {
             try {
-                listaLibri.forEach(System.out::println);
+                listaCatalogo.forEach(System.out::println);
                 System.out.println("Inserisci un anno valido tra i libri sopra riportati");
                 int anno = scanner.nextInt();
                 scanner.nextLine();
-                List<Libro> libriAnno = listaLibri.stream().filter(book -> book.getAnnoPubblicazione() == anno).toList();
+                List<Catalogo> libriAnno = listaCatalogo.stream().filter(book -> book.getAnnoPubblicazione() == anno).toList();
                 if (libriAnno.isEmpty()) {
                     System.out.println("Nessun libro trovato per l'anno " + anno);
                 } else {
@@ -186,13 +186,13 @@ public class Application {
         }
     }
 
-    public static void cercaAutore(List<Libro> listaLibri) {
-        if (listaLibri.isEmpty()) System.out.println("La lista di libri è vuota!");
+    public static void cercaAutore(List<Catalogo> listaCatalogo) {
+        if (listaCatalogo.isEmpty()) System.out.println("La lista di libri è vuota!");
         else {
-            listaLibri.forEach(System.out::println);
+            listaCatalogo.forEach(System.out::println);
             System.out.println("Inserisci un autore valido tra i libri sopra riportati");
             String autore = scanner.nextLine();
-            List<Libro> libriAutore = listaLibri.stream().filter(book -> book.getAutore().equalsIgnoreCase(autore)).toList();
+            List<Libro> libriAutore = listaCatalogo.stream().filter(item -> item instanceof Libro).map(item -> (Libro) item).filter(libro -> libro.getAutore().equalsIgnoreCase(autore)).toList();
             if (libriAutore.isEmpty()) {
                 System.out.println("Nessun libro trovato per l'autore " + autore);
             } else {
@@ -202,13 +202,14 @@ public class Application {
     }
 
 
-    public static void salvaArchivio(List<Libro> listaLibri) {
+    public static void salvaArchivio(List<Catalogo> listaCatalogo) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Libro libro : listaLibri) {
-            stringBuilder.append(libro.toString()).append(System.lineSeparator());
+        for (Catalogo catalogo : listaCatalogo) {
+            stringBuilder.append(catalogo.toString()).append(System.lineSeparator());
         }
         try {
             FileUtils.writeStringToFile(new File("src/archivio.txt"), stringBuilder.toString(), StandardCharsets.UTF_8, true);
+            System.out.println("Catalogo aggiornato");
         } catch (IOException e) {
             throw new RuntimeException("Errore nella scrittura del file");
         }

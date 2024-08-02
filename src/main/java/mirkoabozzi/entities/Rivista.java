@@ -20,8 +20,11 @@ public class Rivista extends Catalogo {
 
     @Override
     public String toString() {
-        return "Riviste{" +
-                "periodicita=" + periodicita +
+        return "Rivista{" +
+                "isbn=" + getIsbn() +
+                ", titolo='" + getTitolo() + '\'' +
+                ", annoPubblicazione=" + getAnnoPubblicazione() +
+                ", numeroPagine=" + getNumeroPagine() +
                 '}';
     }
 }
