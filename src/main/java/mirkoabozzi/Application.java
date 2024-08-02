@@ -46,7 +46,8 @@ public class Application {
             System.out.println("5. Cerca tramite Autore");
             System.out.println("6. Salva archivio su file");
             System.out.println("7. Leggi archivio da file");
-            System.out.println("8. Chiudi programma");
+            System.out.println("8. Svuota archivio");
+            System.out.println("9. Chiudi programma");
 
             String scelta = "";
             try {
@@ -77,6 +78,9 @@ public class Application {
                     leggiArchivio();
                     break;
                 case "8":
+                    svuotaArchivio();
+                    break;
+                case "9":
                     System.out.println("Grazie, buona giornata!");
                     break stop;
                 default:
@@ -271,6 +275,15 @@ public class Application {
             System.out.println(content);
         } catch (IOException e) {
             System.out.println("Errore durante la lettura del file: " + e.getMessage());
+        }
+    }
+
+    public static void svuotaArchivio() {
+        try {
+            FileUtils.writeStringToFile(new File("src/archivio.txt"), "", StandardCharsets.UTF_8);
+            System.out.println("Catalogo svuotato");
+        } catch (IOException e) {
+            throw new RuntimeException("Errore nella scrittura del file");
         }
     }
 }
