@@ -49,7 +49,7 @@ public class Application {
             System.out.println("4. Cerca un libro tramite Anno");
             System.out.println("5. Cerca un libro tramite Autore");
             System.out.println("6. Salva archivio su file");
-            System.out.println("7. Salva archivio su file");
+            System.out.println("7. Leggi archivio da file");
             System.out.println("8. Chiudi programma");
 
             String scelta = "";
@@ -210,7 +210,7 @@ public class Application {
         try {
             FileUtils.writeStringToFile(new File("src/archivio.txt"), stringBuilder.toString(), StandardCharsets.UTF_8, true);
         } catch (IOException e) {
-            throw new RuntimeException();
+            throw new RuntimeException("Errore nella scrittura del file");
         }
     }
 
