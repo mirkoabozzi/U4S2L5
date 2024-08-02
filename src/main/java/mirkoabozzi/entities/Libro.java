@@ -1,13 +1,11 @@
 package mirkoabozzi.entities;
 
-import java.time.LocalDate;
-
-public class Libri extends Catalogo {
+public class Libro extends Catalogo {
     private String autore;
     private String genere;
 
 
-    public Libri(int isbn, String titolo, LocalDate annoPubblicazione, int numeroPagine, String autore, String genere) {
+    public Libro(int isbn, String titolo, String annoPubblicazione, int numeroPagine, String autore, String genere) {
         super(isbn, titolo, annoPubblicazione, numeroPagine);
         this.autore = autore;
         this.genere = genere;
@@ -32,9 +30,13 @@ public class Libri extends Catalogo {
 
     @Override
     public String toString() {
-        return "Libri{" +
+        return "Libro{" +
                 "autore='" + autore + '\'' +
                 ", genere='" + genere + '\'' +
+                ", isbn=" + getIsbn() +
+                ", titolo='" + getTitolo() + '\'' +
+                ", annoPubblicazione=" + getAnnoPubblicazione() +
+                ", numeroPagine=" + getNumeroPagine() +
                 '}';
     }
 }

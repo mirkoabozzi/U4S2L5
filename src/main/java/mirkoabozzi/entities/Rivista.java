@@ -2,12 +2,10 @@ package mirkoabozzi.entities;
 
 import mirkoabozzi.enums.Periodicita;
 
-import java.time.LocalDate;
-
-public class Riviste extends Catalogo {
+public class Rivista extends Catalogo {
     private Periodicita periodicita;
 
-    public Riviste(int isbn, String titolo, LocalDate annoPubblicazione, int numeroPagine, Periodicita periodicita) {
+    public Rivista(int isbn, String titolo, String annoPubblicazione, int numeroPagine, Periodicita periodicita) {
         super(isbn, titolo, annoPubblicazione, numeroPagine);
         this.periodicita = periodicita;
     }
