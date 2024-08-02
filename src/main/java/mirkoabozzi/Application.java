@@ -133,29 +133,46 @@ public class Application {
     }
 
     public static void cercaISBN(List<Libro> listaLibri) {
-        try {
-            listaLibri.forEach(System.out::println);
-            System.out.println("Inserisci un ISBN valido tra i libri sopra riportati");
-            int isbn = scanner.nextInt();
-            scanner.nextLine();
-            boolean libroEsiste = listaLibri.stream().anyMatch(book -> book.getIsbn() == isbn);
-            if (libroEsiste) {
-                listaLibri.stream().filter(book -> book.getIsbn() == isbn).forEach(System.out::println);
-            } else {
-                System.out.println("Il libro non esiste");
+        if (listaLibri.isEmpty()) System.out.println("La lista di libri è vuota!");
+        else {
+
+            try {
+                listaLibri.forEach(System.out::println);
+                System.out.println("Inserisci un ISBN valido tra i libri sopra riportati");
+                int isbn = scanner.nextInt();
+                scanner.nextLine();
+                boolean libroEsiste = listaLibri.stream().anyMatch(book -> book.getIsbn() == isbn);
+                if (libroEsiste) {
+                    listaLibri.stream().filter(book -> book.getIsbn() == isbn).forEach(System.out::println);
+                } else {
+                    System.out.println("Il libro non esiste");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Inserisci un ISBN valido");
+                scanner.nextLine();
             }
-        } catch (InputMismatchException e) {
-            System.out.println("Inserisci un ISBN valido");
-            scanner.nextLine();
         }
     }
 
     public static void cercaAnno(List<Libro> listaLibri) {
-        listaLibri.forEach(System.out::println);
-        System.out.println("Inserisci un anno valido tra i libri sopra riportati");
-        String anno = scanner.nextLine();
-        listaLibri.stream().filter(book -> Objects.equals(book.getAnnoPubblicazione(), anno)).forEach(System.out::println);
-
+        if (listaLibri.isEmpty()) System.out.println("La lista di libri è vuota!");
+        else {
+            try {
+                listaLibri.forEach(System.out::println);
+                System.out.println("Inserisci un anno valido tra i libri sopra riportati");
+                int anno = scanner.nextInt();
+                scanner.nextLine();
+                List<Libro> libriAnno = listaLibri.stream().filter(book -> book.getAnnoPubblicazione() == anno).toList();
+                if (libriAnno.isEmpty()) {
+                    System.out.println("Nessun libro trovato per l'anno " + anno);
+                } else {
+                    libriAnno.forEach(System.out::println);
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Inserisci una data valida");
+                scanner.nextLine();
+            }
+        }
     }
 
     public static void cercaAutore(List<Libro> listaLibri) {
