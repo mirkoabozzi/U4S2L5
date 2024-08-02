@@ -3,10 +3,10 @@ package mirkoabozzi.entities;
 public abstract class Catalogo {
     private int isbn;
     private String titolo;
-    private String annoPubblicazione;
+    private int annoPubblicazione;
     private int numeroPagine;
 
-    public Catalogo(int isbn, String titolo, String annoPubblicazione, int numeroPagine) {
+    public Catalogo(int isbn, String titolo, int annoPubblicazione, int numeroPagine) {
         this.isbn = isbn;
         this.titolo = titolo;
         this.annoPubblicazione = annoPubblicazione;
@@ -29,11 +29,11 @@ public abstract class Catalogo {
         this.titolo = titolo;
     }
 
-    public String getAnnoPubblicazione() {
+    public int getAnnoPubblicazione() {
         return annoPubblicazione;
     }
 
-    public void setAnnoPubblicazione(String annoPubblicazione) {
+    public void setAnnoPubblicazione(int annoPubblicazione) {
         this.annoPubblicazione = annoPubblicazione;
     }
 

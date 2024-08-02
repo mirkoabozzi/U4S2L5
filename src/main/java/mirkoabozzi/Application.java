@@ -8,10 +8,7 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class Application {
     private static Scanner scanner = new Scanner(System.in);
@@ -22,14 +19,14 @@ public class Application {
         List<Libro> listaLibri = new ArrayList<>();
         List<Rivista> listaRiviste = new ArrayList<>();
 
-        Libro libro1 = new Libro(1234, "Il Signore Degli Anelli", "1978", 530, "Tolkien", "romanzo");
-        Libro libro2 = new Libro(5678, "Harry Potter e la pietra filosofale", "1997", 344, "Rowling", "Romanzo");
-        Libro libro3 = new Libro(8910, "Harry Potter e la camera dei segreti", "1998", 375, "Rowling", "Romanzo");
-        Libro libro4 = new Libro(1112, "Le Cronache di Narnia", "2008", 1168, "Lewis", "Fantasy");
-        Rivista rivista1 = new Rivista(1213, "La Nuova Sardegna", "1881", 10, Periodicita.SETTIMANALE);
-        Rivista rivista2 = new Rivista(1415, "Unione Sarda", "1889", 10, Periodicita.SETTIMANALE);
-        Rivista rivista3 = new Rivista(1617, "La Gazzetta Dello Sport", "1896", 10, Periodicita.SETTIMANALE);
-        Rivista rivista4 = new Rivista(1819, "Tutto Sport", "1946", 10, Periodicita.MENSILE);
+        Libro libro1 = new Libro(1234, "Il Signore Degli Anelli", 1978, 530, "Tolkien", "romanzo");
+        Libro libro2 = new Libro(5678, "Harry Potter e la pietra filosofale", 1997, 344, "Rowling", "Romanzo");
+        Libro libro3 = new Libro(8910, "Harry Potter e la camera dei segreti", 1998, 375, "Rowling", "Romanzo");
+        Libro libro4 = new Libro(1112, "Le Cronache di Narnia", 2008, 1168, "Lewis", "Fantasy");
+        Rivista rivista1 = new Rivista(1213, "La Nuova Sardegna", 1881, 10, Periodicita.SETTIMANALE);
+        Rivista rivista2 = new Rivista(1415, "Unione Sarda", 1889, 10, Periodicita.SETTIMANALE);
+        Rivista rivista3 = new Rivista(1617, "La Gazzetta Dello Sport", 1896, 10, Periodicita.SETTIMANALE);
+        Rivista rivista4 = new Rivista(1819, "Tutto Sport", 1946, 10, Periodicita.MENSILE);
         listaLibri.add(libro1);
         listaLibri.add(libro2);
         listaLibri.add(libro3);
@@ -79,30 +76,36 @@ public class Application {
                     System.out.println("Scelta non valida");
                     break;
             }
-
         }
     }
 
     public static void aggiungiLibro(List<Libro> listaLibri) {
-        System.out.println("Aggiungi un libro");
-        System.out.println("Inserisci ISBN");
-        int isbn = scanner.nextInt();
-        scanner.nextLine();
-        System.out.println("Inserisci Titolo");
-        String titolo = scanner.nextLine();
-        System.out.println("Inserisci anno pubblicazione");
-        String annoPubblicazione = scanner.nextLine();
-        System.out.println("Inserisci numero di pagine");
-        int numeroPagine = scanner.nextInt();
-        scanner.nextLine();
-        System.out.println("Inserisci Autore");
-        String autore = scanner.nextLine();
-        System.out.println("Inserisci Genere");
-        String genere = scanner.nextLine();
-        Libro libro = new Libro(isbn, titolo, annoPubblicazione, numeroPagine, autore, genere);
-        listaLibri.add(libro);
-        System.out.println("Libro aggiunto: " + libro);
-        listaLibri.forEach(System.out::println);
+        try {
+            System.out.println("Aggiungi un libro");
+            System.out.println("Inserisci ISBN");
+            int isbn = scanner.nextInt();
+            scanner.nextLine();
+            System.out.println("Inserisci Titolo");
+            String titolo = scanner.nextLine();
+            System.out.println("Inserisci anno pubblicazione");
+            int annoPubblicazione = scanner.nextInt();
+            scanner.nextLine();
+            System.out.println("Inserisci numero di pagine");
+            int numeroPagine = scanner.nextInt();
+            scanner.nextLine();
+            System.out.println("Inserisci Autore");
+            String autore = scanner.nextLine();
+            System.out.println("Inserisci Genere");
+            String genere = scanner.nextLine();
+            Libro libro = new Libro(isbn, titolo, annoPubblicazione, numeroPagine, autore, genere);
+            listaLibri.add(libro);
+            System.out.println("Libro aggiunto: " + libro);
+            listaLibri.forEach(System.out::println);
+        } catch (InputMismatchException e) {
+            System.out.println("Input non valido inserisci i dati corretti");
+
+        }
+
 
     }
 
