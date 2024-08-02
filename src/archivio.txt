@@ -6,3 +6,12 @@ Rivista{isbn=1213, titolo='La Nuova Sardegna', annoPubblicazione=1881, numeroPag
 Rivista{isbn=1415, titolo='Unione Sarda', annoPubblicazione=1889, numeroPagine=10}
 Rivista{isbn=1617, titolo='La Gazzetta Dello Sport', annoPubblicazione=1896, numeroPagine=10}
 Rivista{isbn=1819, titolo='Tutto Sport', annoPubblicazione=1946, numeroPagine=10}
+Libro{autore='Tolkien', genere='romanzo', isbn=1234, titolo='Il Signore Degli Anelli', annoPubblicazione=1978, numeroPagine=530}
+Libro{autore='Rowling', genere='Romanzo', isbn=5678, titolo='Harry Potter e la pietra filosofale', annoPubblicazione=1997, numeroPagine=344}
+Libro{autore='Rowling', genere='Romanzo', isbn=8910, titolo='Harry Potter e la camera dei segreti', annoPubblicazione=1998, numeroPagine=375}
+Libro{autore='Lewis', genere='Fantasy', isbn=1112, titolo='Le Cronache di Narnia', annoPubblicazione=2008, numeroPagine=1168}
+Rivista{isbn=1213, titolo='La Nuova Sardegna', annoPubblicazione=1881, numeroPagine=10, periodicita=SETTIMANALE}
+Rivista{isbn=1415, titolo='Unione Sarda', annoPubblicazione=1889, numeroPagine=10, periodicita=SETTIMANALE}
+Rivista{isbn=1617, titolo='La Gazzetta Dello Sport', annoPubblicazione=1896, numeroPagine=10, periodicita=SETTIMANALE}
+Rivista{isbn=1819, titolo='Tutto Sport', annoPubblicazione=1946, numeroPagine=10, periodicita=MENSILE}
+Libro{autore='Mirko', genere='fantasy', isbn=85, titolo='ciao 85', annoPubblicazione=1985, numeroPagine=85}

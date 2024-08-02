@@ -25,6 +25,7 @@ public class Rivista extends Catalogo {
                 ", titolo='" + getTitolo() + '\'' +
                 ", annoPubblicazione=" + getAnnoPubblicazione() +
                 ", numeroPagine=" + getNumeroPagine() +
+                ", periodicita=" + periodicita +
                 '}';
     }
 }
