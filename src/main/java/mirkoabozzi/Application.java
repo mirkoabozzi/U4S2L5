@@ -14,10 +14,10 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Application {
+    private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
 
-        Scanner scanner = new Scanner(System.in);
 
         List<Libro> listaLibri = new ArrayList<>();
         List<Rivista> listaRiviste = new ArrayList<>();
@@ -40,41 +40,50 @@ public class Application {
         listaRiviste.add(rivista3);
         listaRiviste.add(rivista4);
 
-        System.out.println("Cosa vuoi fare?");
-        System.out.println("1. Aggiungi un libro");
-        System.out.println("2. Rimuovi un libro");
-        System.out.println("3. Cerca un libro tramite ISBN");
-        System.out.println("4. Cerca un libro tramite Anno");
-        System.out.println("5. Cerca un libro tramite Autore");
+        while (true) {
 
+            System.out.println("Cosa vuoi fare?");
+            System.out.println("1. Aggiungi un libro");
+            System.out.println("2. Rimuovi un libro");
+            System.out.println("3. Cerca un libro tramite ISBN");
+            System.out.println("4. Cerca un libro tramite Anno");
+            System.out.println("5. Cerca un libro tramite Autore");
+            System.out.println("6. Salva archivio su file");
 
-        String scelta = scanner.nextLine();
-        switch (scelta) {
-            case "1":
-                aggiungiLibro(listaLibri);
-                break;
-            case "2":
-                rimuoviLibro(listaLibri);
-                break;
-            case "3":
-                cercaISBN(listaLibri);
-                break;
-            case "4":
-                cercaAnno(listaLibri);
-                break;
-            case "5":
-                cercaAutore(listaLibri);
-                break;
-            default:
-                break;
+            String scelta = "";
+            try {
+                scelta = scanner.nextLine();
+            } catch (IllegalStateException e) {
+                System.out.println("Scelta non valida " + e.getMessage());
+            }
+            switch (scelta) {
+                case "1":
+                    aggiungiLibro(listaLibri);
+                    break;
+                case "2":
+                    rimuoviLibro(listaLibri);
+                    break;
+                case "3":
+                    cercaISBN(listaLibri);
+                    break;
+                case "4":
+                    cercaAnno(listaLibri);
+                    break;
+                case "5":
+                    cercaAutore(listaLibri);
+                    break;
+                case "6":
+                    salvaArchivio(listaLibri);
+                    break;
+                default:
+                    System.out.println("Scelta non valida");
+                    break;
+            }
 
         }
-
-        salvaArchivio(listaLibri);
     }
 
     public static void aggiungiLibro(List<Libro> listaLibri) {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Aggiungi un libro");
         System.out.println("Inserisci ISBN");
         int isbn = scanner.nextInt();
@@ -94,7 +103,7 @@ public class Application {
         listaLibri.add(libro);
         System.out.println("Libro aggiunto: " + libro);
         listaLibri.forEach(System.out::println);
-        scanner.close();
+
     }
 
     public static void rimuoviLibro(List<Libro> listaLibri) {
@@ -102,43 +111,39 @@ public class Application {
         else {
             listaLibri.forEach(System.out::println);
             System.out.println("Che libro vuoi rimuovere? scegli un ISBN valido tra i libri sopra riportati");
-            Scanner scanner = new Scanner(System.in);
             int isbn = scanner.nextInt();
             scanner.nextLine();
             listaLibri.removeIf(book -> book.getIsbn() == isbn);
             System.out.println("libro rimosso");
             listaLibri.forEach(System.out::println);
-            scanner.close();
-        }
 
+        }
     }
 
     public static void cercaISBN(List<Libro> listaLibri) {
         listaLibri.forEach(System.out::println);
         System.out.println("Inserisci un ISBN valido tra i libri sopra riportati");
-        Scanner scanner = new Scanner(System.in);
+//        Scanner scanner = new Scanner(System.in);
         int isbn = scanner.nextInt();
         scanner.nextLine();
         listaLibri.stream().filter(book -> book.getIsbn() == isbn).forEach(System.out::println);
-        scanner.close();
+
     }
 
     public static void cercaAnno(List<Libro> listaLibri) {
         listaLibri.forEach(System.out::println);
         System.out.println("Inserisci un anno valido tra i libri sopra riportati");
-        Scanner scanner = new Scanner(System.in);
         String anno = scanner.nextLine();
         listaLibri.stream().filter(book -> Objects.equals(book.getAnnoPubblicazione(), anno)).forEach(System.out::println);
-        scanner.close();
+
     }
 
     public static void cercaAutore(List<Libro> listaLibri) {
         listaLibri.forEach(System.out::println);
         System.out.println("Inserisci un Autore valido tra i libri sopra riportati");
-        Scanner scanner = new Scanner(System.in);
         String autore = scanner.nextLine();
         listaLibri.stream().filter(book -> Objects.equals(book.getAutore(), autore)).forEach(System.out::println);
-        scanner.close();
+
     }
 
     public static void salvaArchivio(List<Libro> listaLibri) {
@@ -152,6 +157,13 @@ public class Application {
             throw new RuntimeException();
         }
 
+//        public static void leggiFile(){
+//
+//            String content= FileUtils.readFileToString(new File("src/archivio.txt"), StandardCharsets.UTF_8);
+//            String[] contentArray = content.split(System.lineSeparator());
+//            System.out.println(Arrays.toString(contentArray));
+//        }
+
     }
-    
+
 }
