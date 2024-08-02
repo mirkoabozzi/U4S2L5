@@ -2,7 +2,7 @@ package mirkoabozzi.entities;
 
 import java.time.LocalDate;
 
-public class Catalogo {
+public abstract class Catalogo {
     private int isbn;
     private String titolo;
     private LocalDate annoPubblicazione;
@@ -45,5 +45,15 @@ public class Catalogo {
 
     public void setNumeroPagine(int numeroPagine) {
         this.numeroPagine = numeroPagine;
+    }
+
+    @Override
+    public String toString() {
+        return "Catalogo{" +
+                "isbn=" + isbn +
+                ", titolo='" + titolo + '\'' +
+                ", annoPubblicazione=" + annoPubblicazione +
+                ", numeroPagine=" + numeroPagine +
+                '}';
     }
 }
