@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class Application {
     private static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
 
         List<Libro> listaLibri = new ArrayList<>();
@@ -49,7 +49,8 @@ public class Application {
             System.out.println("4. Cerca un libro tramite Anno");
             System.out.println("5. Cerca un libro tramite Autore");
             System.out.println("6. Salva archivio su file");
-            System.out.println("7. Chiudi programma");
+            System.out.println("7. Salva archivio su file");
+            System.out.println("8. Chiudi programma");
 
             String scelta = "";
             try {
@@ -77,6 +78,9 @@ public class Application {
                     salvaArchivio(listaLibri);
                     break;
                 case "7":
+                    leggiArchivio();
+                    break;
+                case "8":
                     System.out.println("Grazie, buona giornata!");
                     break stop;
                 default:
@@ -208,14 +212,16 @@ public class Application {
         } catch (IOException e) {
             throw new RuntimeException();
         }
+    }
 
-//        public static void leggiFile(){
-//
-//            String content= FileUtils.readFileToString(new File("src/archivio.txt"), StandardCharsets.UTF_8);
-//            String[] contentArray = content.split(System.lineSeparator());
-//            System.out.println(Arrays.toString(contentArray));
-//        }
-
+    public static void leggiArchivio() {
+        try {
+            String content = FileUtils.readFileToString(new File("src/archivio.txt"), StandardCharsets.UTF_8);
+            System.out.println("Contenuto dell'archivio:");
+            System.out.println(content);
+        } catch (IOException e) {
+            System.out.println("Errore durante la lettura del file: " + e.getMessage());
+        }
     }
 
 }
