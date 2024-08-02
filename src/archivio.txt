@@ -1,0 +1,5 @@
+Libro{autore='Tolkien', genere='romanzo', isbn=1234, titolo='Il Signore Degli Anelli', annoPubblicazione=1978, numeroPagine=530}
+Libro{autore='Rowling', genere='Romanzo', isbn=5678, titolo='Harry Potter e la pietra filosofale', annoPubblicazione=1997, numeroPagine=344}
+Libro{autore='Rowling', genere='Romanzo', isbn=8910, titolo='Harry Potter e la camera dei segreti', annoPubblicazione=1998, numeroPagine=375}
+Libro{autore='Lewis', genere='Fantasy', isbn=1112, titolo='Le Cronache di Narnia', annoPubblicazione=2008, numeroPagine=1168}
+Libro{autore='asfasfasf', genere='asdasda', isbn=122, titolo='asfas', annoPubblicazione=55, numeroPagine=7}

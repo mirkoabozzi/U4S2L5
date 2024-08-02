@@ -3,8 +3,11 @@ package mirkoabozzi;
 import mirkoabozzi.entities.Libro;
 import mirkoabozzi.entities.Rivista;
 import mirkoabozzi.enums.Periodicita;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -12,10 +15,9 @@ import java.util.Scanner;
 
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Scanner scanner = new Scanner(System.in);
-        File file = new File("/src/archivio.txt");
 
         List<Libro> listaLibri = new ArrayList<>();
         List<Rivista> listaRiviste = new ArrayList<>();
@@ -68,7 +70,7 @@ public class Application {
 
         }
 
-
+        salvaArchivio(listaLibri);
     }
 
     public static void aggiungiLibro(List<Libro> listaLibri) {
@@ -139,4 +141,17 @@ public class Application {
         scanner.close();
     }
 
+    public static void salvaArchivio(List<Libro> listaLibri) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Libro libro : listaLibri) {
+            stringBuilder.append(libro.toString()).append(System.lineSeparator());
+        }
+        try {
+            FileUtils.writeStringToFile(new File("src/archivio.txt"), stringBuilder.toString(), StandardCharsets.UTF_8, true);
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
+
+    }
+    
 }
