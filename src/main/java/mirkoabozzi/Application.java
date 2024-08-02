@@ -4,6 +4,7 @@ import mirkoabozzi.entities.Libro;
 import mirkoabozzi.entities.Rivista;
 import mirkoabozzi.enums.Periodicita;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,8 +15,10 @@ public class Application {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+        File file = new File("/src/archivio.txt");
 
         List<Libro> listaLibri = new ArrayList<>();
+        List<Rivista> listaRiviste = new ArrayList<>();
 
         Libro libro1 = new Libro(1234, "Il Signore Degli Anelli", "1978", 530, "Tolkien", "romanzo");
         Libro libro2 = new Libro(5678, "Harry Potter e la pietra filosofale", "1997", 344, "Rowling", "Romanzo");
@@ -29,6 +32,11 @@ public class Application {
         listaLibri.add(libro2);
         listaLibri.add(libro3);
         listaLibri.add(libro4);
+
+        listaRiviste.add(rivista1);
+        listaRiviste.add(rivista2);
+        listaRiviste.add(rivista3);
+        listaRiviste.add(rivista4);
 
         System.out.println("Cosa vuoi fare?");
         System.out.println("1. Aggiungi un libro");
@@ -81,17 +89,15 @@ public class Application {
         System.out.println("Inserisci Genere");
         String genere = scanner.nextLine();
         Libro libro = new Libro(isbn, titolo, annoPubblicazione, numeroPagine, autore, genere);
-
         listaLibri.add(libro);
-
-        System.out.println("Libro aggiunto");
+        System.out.println("Libro aggiunto: " + libro);
+        listaLibri.forEach(System.out::println);
         scanner.close();
     }
 
     public static void rimuoviLibro(List<Libro> listaLibri) {
         if (listaLibri.isEmpty()) System.out.println("La lista di libri è vuota!");
         else {
-
             listaLibri.forEach(System.out::println);
             System.out.println("Che libro vuoi rimuovere? scegli un ISBN valido tra i libri sopra riportati");
             Scanner scanner = new Scanner(System.in);
@@ -100,7 +106,6 @@ public class Application {
             listaLibri.removeIf(book -> book.getIsbn() == isbn);
             System.out.println("libro rimosso");
             listaLibri.forEach(System.out::println);
-
             scanner.close();
         }
 
@@ -113,6 +118,7 @@ public class Application {
         int isbn = scanner.nextInt();
         scanner.nextLine();
         listaLibri.stream().filter(book -> book.getIsbn() == isbn).forEach(System.out::println);
+        scanner.close();
     }
 
     public static void cercaAnno(List<Libro> listaLibri) {
@@ -121,6 +127,7 @@ public class Application {
         Scanner scanner = new Scanner(System.in);
         String anno = scanner.nextLine();
         listaLibri.stream().filter(book -> Objects.equals(book.getAnnoPubblicazione(), anno)).forEach(System.out::println);
+        scanner.close();
     }
 
     public static void cercaAutore(List<Libro> listaLibri) {
@@ -129,6 +136,7 @@ public class Application {
         Scanner scanner = new Scanner(System.in);
         String autore = scanner.nextLine();
         listaLibri.stream().filter(book -> Objects.equals(book.getAutore(), autore)).forEach(System.out::println);
+        scanner.close();
     }
 
 }
