@@ -103,22 +103,31 @@ public class Application {
             listaLibri.forEach(System.out::println);
         } catch (InputMismatchException e) {
             System.out.println("Input non valido inserisci i dati corretti");
-
+            scanner.nextLine();
         }
-
 
     }
 
     public static void rimuoviLibro(List<Libro> listaLibri) {
         if (listaLibri.isEmpty()) System.out.println("La lista di libri è vuota!");
         else {
-            listaLibri.forEach(System.out::println);
-            System.out.println("Che libro vuoi rimuovere? scegli un ISBN valido tra i libri sopra riportati");
-            int isbn = scanner.nextInt();
-            scanner.nextLine();
-            listaLibri.removeIf(book -> book.getIsbn() == isbn);
-            System.out.println("libro rimosso");
-            listaLibri.forEach(System.out::println);
+            try {
+                listaLibri.forEach(System.out::println);
+                System.out.println("Che libro vuoi rimuovere? scegli un ISBN valido tra i libri sopra riportati");
+                int isbn = scanner.nextInt();
+                scanner.nextLine();
+                boolean libroEsiste = listaLibri.stream().anyMatch(book -> book.getIsbn() == isbn);
+                if (libroEsiste) {
+                    listaLibri.removeIf(book -> book.getIsbn() == isbn);
+                    System.out.println("libro rimosso");
+                } else {
+                    System.out.println("Il libro non esiste");
+                }
+                listaLibri.forEach(System.out::println);
+            } catch (InputMismatchException e) {
+                System.out.println("Inserisci un ISBN valido");
+                scanner.nextLine();
+            }
 
         }
     }
@@ -126,7 +135,6 @@ public class Application {
     public static void cercaISBN(List<Libro> listaLibri) {
         listaLibri.forEach(System.out::println);
         System.out.println("Inserisci un ISBN valido tra i libri sopra riportati");
-//        Scanner scanner = new Scanner(System.in);
         int isbn = scanner.nextInt();
         scanner.nextLine();
         listaLibri.stream().filter(book -> book.getIsbn() == isbn).forEach(System.out::println);
