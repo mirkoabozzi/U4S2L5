@@ -8,7 +8,10 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
 
 public class Application {
     private static Scanner scanner = new Scanner(System.in);
@@ -36,7 +39,7 @@ public class Application {
         listaRiviste.add(rivista2);
         listaRiviste.add(rivista3);
         listaRiviste.add(rivista4);
-
+        stop:
         while (true) {
 
             System.out.println("Cosa vuoi fare?");
@@ -46,6 +49,7 @@ public class Application {
             System.out.println("4. Cerca un libro tramite Anno");
             System.out.println("5. Cerca un libro tramite Autore");
             System.out.println("6. Salva archivio su file");
+            System.out.println("7. Chiudi programma");
 
             String scelta = "";
             try {
@@ -72,6 +76,9 @@ public class Application {
                 case "6":
                     salvaArchivio(listaLibri);
                     break;
+                case "7":
+                    System.out.println("Grazie, buona giornata!");
+                    break stop;
                 default:
                     System.out.println("Scelta non valida");
                     break;
@@ -176,12 +183,20 @@ public class Application {
     }
 
     public static void cercaAutore(List<Libro> listaLibri) {
-        listaLibri.forEach(System.out::println);
-        System.out.println("Inserisci un Autore valido tra i libri sopra riportati");
-        String autore = scanner.nextLine();
-        listaLibri.stream().filter(book -> Objects.equals(book.getAutore(), autore)).forEach(System.out::println);
-
+        if (listaLibri.isEmpty()) System.out.println("La lista di libri è vuota!");
+        else {
+            listaLibri.forEach(System.out::println);
+            System.out.println("Inserisci un autore valido tra i libri sopra riportati");
+            String autore = scanner.nextLine();
+            List<Libro> libriAutore = listaLibri.stream().filter(book -> book.getAutore().equalsIgnoreCase(autore)).toList();
+            if (libriAutore.isEmpty()) {
+                System.out.println("Nessun libro trovato per l'autore " + autore);
+            } else {
+                libriAutore.forEach(System.out::println);
+            }
+        }
     }
+
 
     public static void salvaArchivio(List<Libro> listaLibri) {
         StringBuilder stringBuilder = new StringBuilder();
